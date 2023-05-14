@@ -3,9 +3,11 @@ import { ShooterController } from "./shooter.controller";
 import { ShooterService } from "./shooter.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Shooter } from "src/entities/Shooter";
+import { ShooterProfileModule } from "./shooter-profile/shooter-profile.module";
+import { ShooterHistoryModule } from './shooter-history/shooter-history.module';
 
 @Module({
-	imports: [TypeOrmModule.forFeature([Shooter])],
+	imports: [TypeOrmModule.forFeature([Shooter]), ShooterProfileModule, ShooterHistoryModule],
 	controllers: [ShooterController],
 	providers: [ShooterService],
 })

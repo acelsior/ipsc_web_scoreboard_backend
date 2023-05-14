@@ -14,7 +14,9 @@ export class ShooterService {
 	) {}
 
 	getAllShooters() {
-		return this.shooterRepo.find();
+		return this.shooterRepo.find({
+			relations: ["profile", "history"],
+		});
 	}
 
 	createShooter(shooterParam: CreateShooterParameters) {
@@ -35,14 +37,14 @@ export class ShooterService {
 			{
 				division: newShooterData.division,
 				firstName: newShooterData.firstName,
-				lastName: newShooterData.lastName
+				lastName: newShooterData.lastName,
 			}
 		);
 	}
 
 	deleteShooter(id: number) {
 		return this.shooterRepo.delete({
-			id: id
+			id: id,
 		});
 	}
 }

@@ -16,13 +16,13 @@ import { ShooterService } from "./shooter.service";
 export class ShooterController {
 	constructor(private shooterService: ShooterService) {}
 
-	@Get("getAllShooters")
+	@Get()
 	async getAllShooters() {
 		const shooters = await this.shooterService.getAllShooters();
 		return shooters;
 	}
 
-	@Post("createShooter")
+	@Post()
 	async createShooter(@Body() createShooterDTO: CreateShooterDTO) {
 		if (
 			createShooterDTO.division == null ||
@@ -35,7 +35,7 @@ export class ShooterController {
 		return this.shooterService.createShooter(createShooterDTO);
 	}
 
-	@Put("updateShooterByID/:id")
+	@Put(":id")
 	async updateShooterByID(
 		@Param("id", ParseIntPipe) id: number,
 		@Body() newShooterData: UpdateShooterDTO
@@ -43,7 +43,7 @@ export class ShooterController {
 		return this.shooterService.updateShooter(id, newShooterData);
 	}
 
-	@Delete("deleteShooterByID/:id")
+	@Delete(":id")
 	async deleteShooterByID(@Param("id", ParseIntPipe) id: number) {
 		return this.shooterService.deleteShooter(id);
 	}
