@@ -25,9 +25,9 @@ export class ShooterController {
 	@Post()
 	async createShooter(@Body() createShooterDTO: CreateShooterDTO) {
 		if (
-			createShooterDTO.division == null ||
-			createShooterDTO.firstName == null ||
-			createShooterDTO.lastName == null
+			createShooterDTO.division.toString() == "" ||
+			createShooterDTO.firstName == "" ||
+			createShooterDTO.lastName == ""
 		)
 			return new BadRequestException(
 				"division, lastname or firstname can't be null"
