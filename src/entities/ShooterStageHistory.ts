@@ -29,9 +29,9 @@ export class ShooterStageHistory {
 		procedureErrorCount: number;
 	@Column()
 		scoreCount: number;
-	@Column()
+	@Column({ type: "float"})
 		timeCount: number;
-	@Column()
+	@Column({ type: "float"})
 		hitFactor: number;
 	@Column()
 		disqualified: boolean;

@@ -16,6 +16,6 @@ export class ShooterProfile {
 
 	@Column()
 		stageHaveFinish: number;
-	@Column()
+	@Column({ type: "float"})
 		averageHitFactor: number;
 }
