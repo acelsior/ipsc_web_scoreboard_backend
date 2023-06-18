@@ -19,6 +19,15 @@ export class ShooterService {
 		});
 	}
 
+	getShooterByID(id: number) {
+		return this.shooterRepo.find({
+			relations: ["profile", "history"],
+			where: {
+				id: id
+			}
+		})
+	}
+
 	createShooter(shooterParam: CreateShooterParameters) {
 		const newShooter = this.shooterRepo.create({
 			createAt: new Date(),

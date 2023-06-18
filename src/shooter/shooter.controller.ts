@@ -21,6 +21,12 @@ export class ShooterController {
 		const shooters = await this.shooterService.getAllShooters();
 		return shooters;
 	}
+	@Get(":id")
+	async getShooterByID(
+		@Param("id", ParseIntPipe) id: number,
+	) {
+		return this.shooterService.getShooterByID(id);
+	}
 
 	@Post()
 	async createShooter(@Body() createShooterDTO: CreateShooterDTO) {
