@@ -25,7 +25,7 @@ export class ShooterService {
 			where: {
 				id: id
 			}
-		})
+		})[0]
 	}
 
 	createShooter(shooterParam: CreateShooterParameters) {
