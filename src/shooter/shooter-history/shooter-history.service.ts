@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateNewStageHistoryParameters } from "src/dtos/shooterStageHistory.dto";
-import { Shooter } from "src/entities/Shooter";
-import { ShooterStageHistory } from "src/entities/ShooterStageHistory";
+import { Shooter } from "src/entities/shooter/Shooter";
+import { ShooterStageHistory } from "src/entities/shooter/ShooterStageHistory";
 import { Repository } from "typeorm";
 
 @Injectable()

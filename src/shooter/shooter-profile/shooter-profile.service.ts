@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Shooter } from "src/entities/Shooter";
-import { ShooterProfile } from "src/entities/ShooterProfile";
+import { Shooter } from "src/entities/shooter/Shooter";
+import { ShooterProfile } from "src/entities/shooter/ShooterProfile";
 import { Repository } from "typeorm";
 
 @Injectable()

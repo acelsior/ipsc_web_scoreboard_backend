@@ -3,10 +3,10 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-import { Shooter } from "./entities/Shooter";
+import { Shooter } from "./entities/shooter/Shooter";
 import { ShooterModule } from "./shooter/shooter.module";
-import { ShooterProfile } from "./entities/ShooterProfile";
-import { ShooterStageHistory } from "./entities/ShooterStageHistory";
+import { ShooterProfile } from "./entities/shooter/ShooterProfile";
+import { ShooterStageHistory } from "./entities/shooter/ShooterStageHistory";
 dotenv.config();
 
 @Module({

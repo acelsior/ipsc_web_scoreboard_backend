@@ -6,7 +6,7 @@ import {
 	OneToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
-import { Division } from "../types";
+import { Division } from "../../types";
 import { ShooterProfile } from "./ShooterProfile";
 import { ShooterStageHistory } from "./ShooterStageHistory";
 

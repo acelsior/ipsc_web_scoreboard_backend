@@ -4,7 +4,7 @@ import {
 	CreateShooterParameters,
 	UpdateShooterParameters,
 } from "src/dtos/shooter.dto";
-import { Shooter } from "src/entities/Shooter";
+import { Shooter } from "src/entities/shooter/Shooter";
 import { Repository } from "typeorm";
 
 @Injectable()
