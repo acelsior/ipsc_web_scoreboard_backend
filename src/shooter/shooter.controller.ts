@@ -25,7 +25,7 @@ export class ShooterController {
 	async getShooterByID(
 		@Param("id", ParseIntPipe) id: number,
 	) {
-		return this.shooterService.getShooterByID(id);
+		return (await this.shooterService.getShooterByID(id))[0];
 	}
 
 	@Post()
