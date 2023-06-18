@@ -27,6 +27,7 @@ export class ShooterProfileService {
 			firstName: shooter.firstName,
 			lastName: shooter.lastName,
 			stageHaveFinish: 0,
+			shooter: shooter,
 		})
 		const savedProfile = await this.shooterProfileRepo.save(newProfile);
 		shooter.profile = savedProfile;

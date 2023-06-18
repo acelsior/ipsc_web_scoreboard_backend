@@ -1,8 +1,5 @@
-import {
-	Column,
-	Entity,
-	PrimaryGeneratedColumn,
-} from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Shooter } from "./Shooter";
 
 @Entity({ name: "shooter_profile" })
 export class ShooterProfile {
@@ -16,6 +13,12 @@ export class ShooterProfile {
 
 	@Column()
 		stageHaveFinish: number;
-	@Column({ type: "float"})
+	@Column({ type: "float" })
 		averageHitFactor: number;
+
+	@OneToOne(() => Shooter, (shooter) => shooter.profile, {
+		onDelete: "CASCADE",
+	})
+	@JoinColumn()
+		shooter: Shooter;
 }

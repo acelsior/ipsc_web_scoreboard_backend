@@ -26,7 +26,7 @@ export class Shooter {
 	@Column({ nullable: false })
 		createAt: Date;
 
-	@OneToOne(() => ShooterProfile)
+	@OneToOne(() => ShooterProfile, { eager: true, onDelete: "CASCADE" })
 	@JoinColumn()
 		profile: ShooterProfile;
 
