@@ -41,8 +41,8 @@ export class StageController {
 			!stageParam.poppersOrPlates ||
 			!stageParam.noShoots ||
 			!stageParam.minRounds ||
-			!stageParam.scoringMethod ||
-			!stageParam.photo
+			!stageParam.photo ||
+			!stageParam.condition
 		) {
 			return new BadRequestException("title, description, stageType, maxScores, paperTargets, poppersOrPlates, noShoots, minRounds, scoringMethod, photo can't be null");
 		}

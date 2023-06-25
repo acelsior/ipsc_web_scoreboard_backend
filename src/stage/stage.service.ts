@@ -33,13 +33,13 @@ export class StageService {
 			description: stageParam.description,
 			maxScores: stageParam.maxScores,
 			minRounds: stageParam.minRounds,
-			scoringMethod: stageParam.scoringMethod,
 			noShoots: stageParam.noShoots,
 			paperTargets: stageParam.paperTargets,
 			poppersOrPlates: stageParam.poppersOrPlates,
 			stageType: stageParam.stageType,
 			title: stageParam.title,
 			photo: stageParam.photo,
+			condition: stageParam.condition
 		});
 		return (await this.stageRepo.save(newStage)).id;
 	}

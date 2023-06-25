@@ -1,4 +1,4 @@
-import { ScoringMethod, StageType } from "src/types";
+import { Condition, StageType } from "src/types";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "stages" })
@@ -14,9 +14,6 @@ export class Stage {
 
 	@Column({ type: "longtext" })
 		photo: string; //base64 encoded photo
-
-	@Column()
-		scoringMethod : ScoringMethod; 
 
 	@Column()
 		stageType: StageType;
@@ -35,4 +32,7 @@ export class Stage {
 
 	@Column()
 		minRounds: number;
+
+	@Column()
+		condition: Condition;
 }

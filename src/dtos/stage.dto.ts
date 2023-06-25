@@ -1,4 +1,4 @@
-import { ScoringMethod, StageType } from "src/types";
+import { Condition, StageType } from "src/types";
 
 export interface CreateStageDTO {
 	title: string;
@@ -9,6 +9,6 @@ export interface CreateStageDTO {
 	poppersOrPlates: number;
 	noShoots: number;
 	minRounds: number;
-	scoringMethod: ScoringMethod;
 	photo: string;
+	condition: Condition;
 }
