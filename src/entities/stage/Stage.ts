@@ -12,8 +12,8 @@ export class Stage {
 	@Column()
 		description: string;
 
-	@Column({ type: "longtext" })
-		photo: string; //base64 encoded photo
+	@Column({ type: "json" })
+		photo: string[]; //base64 encoded photo
 
 	@Column()
 		stageType: StageType;
