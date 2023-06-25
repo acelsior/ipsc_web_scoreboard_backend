@@ -34,6 +34,8 @@ export class ShooterService {
 			division: shooterParam.division,
 			firstName: shooterParam.firstName,
 			lastName: shooterParam.lastName,
+			averageHitFactor: 0.0,
+			stageHaveFinish: 0,
 		});
 		return this.shooterRepo.save(newShooter);
 	}
