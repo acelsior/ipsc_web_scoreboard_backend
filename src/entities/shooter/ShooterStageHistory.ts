@@ -35,4 +35,6 @@ export class ShooterStageHistory {
 		hitFactor: number;
 	@Column()
 		disqualified: boolean;
+	@Column()
+		didNotFinished: boolean;
 }

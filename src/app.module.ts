@@ -6,7 +6,7 @@ import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-
 import { Shooter } from "./entities/shooter/Shooter";
 import { ShooterModule } from "./shooter/shooter.module";
 import { ShooterStageHistory } from "./entities/shooter/ShooterStageHistory";
-import { Stages } from "./entities/stage/Stage";
+import { Stage } from "./entities/stage/Stage";
 import { StageModule } from './stage/stage.module';
 dotenv.config();
 
@@ -19,7 +19,7 @@ dotenv.config();
 			username: "root",
 			password: process.env.MYSQL_PSW,
 			database: "ipsc_scoreboard_db",
-			entities: [Shooter, ShooterStageHistory, Stages],
+			entities: [Shooter, ShooterStageHistory, Stage],
 			synchronize: true,
 		}),
 		ShooterModule,

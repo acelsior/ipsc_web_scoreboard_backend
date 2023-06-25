@@ -1,8 +1,8 @@
-import { StageType } from "src/types";
+import { ScoringMethod, StageType } from "src/types";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "stages" })
-export class Stages {
+export class Stage {
 	@PrimaryGeneratedColumn()
 		id: number;
 
@@ -14,6 +14,9 @@ export class Stages {
 
 	@Column({ type: "longtext" })
 		photo: string; //base64 encoded photo
+
+	@Column()
+		scoringMethod : ScoringMethod; 
 
 	@Column()
 		stageType: StageType;
