@@ -15,13 +15,13 @@ export class ShooterService {
 
 	getAllShooters() {
 		return this.shooterRepo.find({
-			relations: ["profile", "history"],
+			relations: ["history"],
 		});
 	}
 
 	getShooterByID(id: number) {
 		return this.shooterRepo.find({
-			relations: ["profile", "history"],
+			relations: ["history"],
 			where: {
 				id: id
 			}
@@ -34,6 +34,8 @@ export class ShooterService {
 			division: shooterParam.division,
 			firstName: shooterParam.firstName,
 			lastName: shooterParam.lastName,
+			averageHitFactor: 0.0,
+			stageHaveFinish: 0,
 		});
 		return this.shooterRepo.save(newShooter);
 	}

@@ -1,13 +1,10 @@
 import {
 	Column,
 	Entity,
-	JoinColumn,
 	OneToMany,
-	OneToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
 import { Division } from "../../types";
-import { ShooterProfile } from "./ShooterProfile";
 import { ShooterStageHistory } from "./ShooterStageHistory";
 
 @Entity({ name: "shooters" })
@@ -23,12 +20,13 @@ export class Shooter {
 	@Column({ nullable: false })
 		division: Division;
 
+	@Column()
+		stageHaveFinish: number;
+	@Column({ type: "float" })
+		averageHitFactor: number;
+
 	@Column({ nullable: false })
 		createAt: Date;
-
-	@OneToOne(() => ShooterProfile, { eager: true, onDelete: "CASCADE" })
-	@JoinColumn()
-		profile: ShooterProfile;
 
 	@OneToMany(() => ShooterStageHistory, (hist) => hist.shooter)
 		history: ShooterStageHistory[];

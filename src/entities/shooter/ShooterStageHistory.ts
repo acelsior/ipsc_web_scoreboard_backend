@@ -8,10 +8,6 @@ export class ShooterStageHistory {
 
 	@ManyToOne(() => Shooter, (shooter) => shooter.history)
 		shooter: Shooter;
-	@Column()
-		firstName: string;
-	@Column()
-		lastName: string;
 
 	@Column()
 		alphaCount: number;
@@ -35,4 +31,6 @@ export class ShooterStageHistory {
 		hitFactor: number;
 	@Column()
 		disqualified: boolean;
+	@Column()
+		didNotFinished: boolean;
 }
