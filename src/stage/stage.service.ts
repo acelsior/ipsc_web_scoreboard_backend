@@ -13,7 +13,7 @@ export class StageService {
 	) {}
 
 	async getAllStages() {
-		return await this.stageRepo.find();
+		return await this.stageRepo.find({relations: ["images"]});
 	}
 
 	async getStageByID(id: number) {
@@ -22,6 +22,7 @@ export class StageService {
 				where: {
 					id: id,
 				},
+				relations: ["images"],
 			})
 		)[0];
 	}
