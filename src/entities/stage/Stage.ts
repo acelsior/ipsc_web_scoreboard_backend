@@ -13,7 +13,7 @@ export class Stage {
 	@Column()
 		description: string;
 
-	@OneToMany(() => ImageUploadFile, (hist) => hist.id)
+	@OneToMany(() => ImageUploadFile, (hist) => hist.stage)
 		images: ImageUploadFile[];
 
 

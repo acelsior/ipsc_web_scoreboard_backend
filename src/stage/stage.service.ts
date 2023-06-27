@@ -27,6 +27,18 @@ export class StageService {
 	}
 
 	async deleteStageByID(id: number) {
+		const stage = (await this.stageRepo.find({
+			where: {
+				id: id,
+			},
+			relations: [
+				"images"
+			]
+		}))[0]
+		for (const image of stage.images) {
+			await this.imageUploadService.deleteImageByID(image.id)
+		}
+
 		return await this.stageRepo.delete({ id: id });
 	}
 
@@ -43,7 +55,6 @@ export class StageService {
 			// photo: stageParam.photo,
 			condition: stageParam.condition
 		});
-		console.log(newStage)
 		const newStageInstance = await this.stageRepo.save(newStage)
 		
 		stageParam.photo.forEach((photoId) => {

@@ -49,8 +49,6 @@ export class ShooterHistoryService {
 
 		const newHistory = this.historyRepo.create({
 			shooter: shooter,
-			firstName: shooter.firstName,
-			lastName: shooter.lastName,
 			alphaCount: alpha,
 			charlieCount: charlie,
 			deltaCount: delta,

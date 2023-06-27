@@ -15,7 +15,7 @@ class ImageUploadFile {
 	@Column()
 		mimetype: string;
 	
-	@ManyToOne(() => Stage, (hist) => hist.id)
+	@ManyToOne(() => Stage, (hist) => hist.images)
 		stage: Stage;
 }
 
