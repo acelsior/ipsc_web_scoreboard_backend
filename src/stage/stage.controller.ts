@@ -30,6 +30,7 @@ export class StageController {
 		return await this.stageService.deleteStageByID(id);
 	}
 
+	//upload image before calling this api
 	@Post()
 	async createStage(@Body() stageParam: CreateStageDTO) {
 		if (
@@ -44,7 +45,9 @@ export class StageController {
 			!stageParam.photo ||
 			!stageParam.condition
 		) {
-			return new BadRequestException("title, description, stageType, maxScores, paperTargets, poppersOrPlates, noShoots, minRounds, scoringMethod, photo can't be null");
+			return new BadRequestException(
+				"title, description, stageType, maxScores, paperTargets, poppersOrPlates, noShoots, minRounds, condition, photo can't be null"
+			);
 		}
 		return await this.stageService.createStage(stageParam);
 	}

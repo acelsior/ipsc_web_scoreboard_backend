@@ -8,6 +8,8 @@ import { ShooterModule } from "./shooter/shooter.module";
 import { ShooterStageHistory } from "./entities/shooter/ShooterStageHistory";
 import { Stage } from "./entities/stage/Stage";
 import { StageModule } from './stage/stage.module';
+import { ImageUploadModule } from './image-upload/image-upload.module';
+import ImageUploadFile from "./entities/image-upload/ImageUpload";
 dotenv.config();
 
 @Module({
@@ -19,11 +21,12 @@ dotenv.config();
 			username: "root",
 			password: process.env.MYSQL_PSW,
 			database: "ipsc_scoreboard_db",
-			entities: [Shooter, ShooterStageHistory, Stage],
+			entities: [Shooter, ShooterStageHistory, Stage, ImageUploadFile],
 			synchronize: true,
 		}),
 		ShooterModule,
 		StageModule,
+		ImageUploadModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],

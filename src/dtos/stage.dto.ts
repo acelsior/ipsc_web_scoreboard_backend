@@ -9,6 +9,6 @@ export interface CreateStageDTO {
 	poppersOrPlates: number;
 	noShoots: number;
 	minRounds: number;
-	photo: string[];
+	photo: number[]; // photo id
 	condition: Condition;
 }

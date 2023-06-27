@@ -1,5 +1,6 @@
 import { Condition, StageType } from "src/types";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import ImageUploadFile from "../image-upload/ImageUpload";
 
 @Entity({ name: "stages" })
 export class Stage {
@@ -12,8 +13,9 @@ export class Stage {
 	@Column()
 		description: string;
 
-	@Column({ type: "json" })
-		photo: string[]; //base64 encoded photo
+	@OneToMany(() => ImageUploadFile, (hist) => hist.id)
+		images: ImageUploadFile[];
+
 
 	@Column()
 		stageType: StageType;

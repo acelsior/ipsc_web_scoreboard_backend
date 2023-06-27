@@ -2,12 +2,14 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CreateStageDTO } from "src/dtos/stage.dto";
 import { Stage } from "src/entities/stage/Stage";
+import { ImageUploadService } from "src/image-upload/image-upload.service";
 import { Repository } from "typeorm";
 
 @Injectable()
 export class StageService {
 	constructor(
-		@InjectRepository(Stage) private stageRepo: Repository<Stage>
+		@InjectRepository(Stage) private stageRepo: Repository<Stage>,
+		private imageUploadService: ImageUploadService
 	) {}
 
 	async getAllStages() {
@@ -38,9 +40,15 @@ export class StageService {
 			poppersOrPlates: stageParam.poppersOrPlates,
 			stageType: stageParam.stageType,
 			title: stageParam.title,
-			photo: stageParam.photo,
+			// photo: stageParam.photo,
 			condition: stageParam.condition
 		});
-		return (await this.stageRepo.save(newStage)).id;
+		console.log(newStage)
+		const newStageInstance = await this.stageRepo.save(newStage)
+		
+		stageParam.photo.forEach((photoId) => {
+			this.imageUploadService.bindImageToStage(photoId, newStage)
+		})
+		return newStageInstance.id;
 	}
 }
