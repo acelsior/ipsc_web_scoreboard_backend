@@ -6,7 +6,9 @@ export class ShooterStageHistory {
 	@PrimaryGeneratedColumn()
 		id: number;
 
-	@ManyToOne(() => Shooter, (shooter) => shooter.history)
+	@ManyToOne(() => Shooter, (shooter) => shooter.history, {
+		onDelete: "CASCADE"
+	})
 		shooter: Shooter;
 
 	@Column()

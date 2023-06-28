@@ -28,6 +28,8 @@ export class Shooter {
 	@Column({ nullable: false })
 		createAt: Date;
 
-	@OneToMany(() => ShooterStageHistory, (hist) => hist.shooter)
+	@OneToMany(() => ShooterStageHistory, (hist) => hist.shooter, {
+		cascade: true
+	})
 		history: ShooterStageHistory[];
 }
