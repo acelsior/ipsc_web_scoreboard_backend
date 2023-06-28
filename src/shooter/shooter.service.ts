@@ -19,13 +19,56 @@ export class ShooterService {
 		});
 	}
 
+	getAllShootersWithOptionalFields(
+		id: string,
+		firstName: string,
+		lastName: string,
+		division: string,
+		createAt: string,
+		stageHaveFinish: string,
+		averageHitFactor: string,
+		history: string
+	) {
+		const select = [];
+		if (id != undefined) {
+			select.push("id");
+		}
+		if (firstName != undefined) {
+			select.push("firstName");
+		}
+		if (lastName != undefined) {
+			select.push("lastName");
+		}
+		if (division != undefined) {
+			select.push("division");
+		}
+		if (createAt != undefined) {
+			select.push("createAt");
+		}
+		if (stageHaveFinish != undefined) {
+			select.push("stageHaveFinish");
+		}
+		if (averageHitFactor != undefined) {
+			select.push("averageHitFactor");
+		}
+		const relations = [];
+		if (history != undefined) {
+			relations.push("history");
+		}
+
+		return this.shooterRepo.find({
+			select: select,
+			relations: relations,
+		});
+	}
+
 	getShooterByID(id: number) {
 		return this.shooterRepo.find({
 			relations: ["history"],
 			where: {
-				id: id
-			}
-		})
+				id: id,
+			},
+		});
 	}
 
 	createShooter(shooterParam: CreateShooterParameters) {
