@@ -38,6 +38,9 @@ export class Stage {
 
 	@Column()
 		condition: Condition;
+	
+	@Column({ nullable: false })
+		createAt: Date;
 		
 	@OneToMany(() => ShooterStageHistory, (hist) => hist.stage)
 		history: ShooterStageHistory[];

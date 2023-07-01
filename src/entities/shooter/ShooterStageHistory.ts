@@ -42,4 +42,6 @@ export class ShooterStageHistory {
 		disqualified: boolean;
 	@Column()
 		didNotFinished: boolean;
+	@Column({ nullable: false })
+		createAt: Date;
 }

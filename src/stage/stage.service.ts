@@ -71,6 +71,7 @@ export class StageService {
 			title: stageParam.title,
 			// photo: stageParam.photo,
 			condition: stageParam.condition,
+			createAt: Date.now(),
 		});
 		const newStageInstance = await this.stageRepo.save(newStage);
 
