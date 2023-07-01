@@ -1,6 +1,7 @@
 import { Condition, StageType } from "src/types";
 import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import ImageUploadFile from "../image-upload/ImageUpload";
+import { ShooterStageHistory } from "../shooter/ShooterStageHistory";
 
 @Entity({ name: "stages" })
 export class Stage {
@@ -37,4 +38,7 @@ export class Stage {
 
 	@Column()
 		condition: Condition;
+		
+	@OneToMany(() => ShooterStageHistory, (hist) => hist.stage)
+		history: ShooterStageHistory[];
 }

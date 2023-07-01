@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Shooter } from "./Shooter";
+import { Stage } from "../stage/Stage";
 
 @Entity({ name: "shooter_stage_history" })
 export class ShooterStageHistory {
@@ -10,6 +11,10 @@ export class ShooterStageHistory {
 		onDelete: "CASCADE"
 	})
 		shooter: Shooter;
+	@ManyToOne(() => Stage, (stage) => stage.history, {
+		onDelete: "CASCADE"
+	})
+		stage: Stage;
 
 	@Column()
 		alphaCount: number;
@@ -18,9 +23,11 @@ export class ShooterStageHistory {
 	@Column()
 		deltaCount: number;
 	@Column()
+		paperMissCount: number;
+	@Column()
 		plateCount: number;
 	@Column()
-		missCount: number;
+		plateMissCount: number;
 	@Column()
 		noShootCount: number;
 	@Column()

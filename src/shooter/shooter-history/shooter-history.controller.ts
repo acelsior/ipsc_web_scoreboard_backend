@@ -4,8 +4,8 @@ import { CreateNewStageHistoryDTO } from "src/dtos/shooterStageHistory.dto";
 
 @Controller("shooter")
 export class ShooterHistoryController {
-	constructor(private shooterHistoryService: ShooterHistoryService) {}
-
+	constructor(private shooterHistoryService: ShooterHistoryService) { }
+	
 	@Post(":id/stage")
 	createNewStageHistory(
 		@Param("id", ParseIntPipe) id: number,

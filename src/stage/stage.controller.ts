@@ -20,6 +20,11 @@ export class StageController {
 		return await this.stageService.getAllStages();
 	}
 
+	@Get(":id/score")
+	async getStageScoreByID(@Param("id", ParseIntPipe) id: number) {
+		return (await this.stageService.getStageScoreByID(id));
+	}
+
 	@Get(":id")
 	async getStageByID(@Param("id", ParseIntPipe) id: number) {
 		return await this.stageService.getStageByID(id);

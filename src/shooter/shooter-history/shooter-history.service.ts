@@ -3,6 +3,8 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { CreateNewStageHistoryParameters } from "src/dtos/shooterStageHistory.dto";
 import { Shooter } from "src/entities/shooter/Shooter";
 import { ShooterStageHistory } from "src/entities/shooter/ShooterStageHistory";
+import { Stage } from "src/entities/stage/Stage";
+import { StageService } from "src/stage/stage.service";
 import { Repository } from "typeorm";
 
 @Injectable()
@@ -10,7 +12,8 @@ export class ShooterHistoryService {
 	constructor(
 		@InjectRepository(Shooter) private shooterRepo: Repository<Shooter>,
 		@InjectRepository(ShooterStageHistory)
-		private historyRepo: Repository<ShooterStageHistory>
+		private historyRepo: Repository<ShooterStageHistory>,
+		@InjectRepository(Stage) private stageRepo: Repository<Stage>
 	) {}
 
 	async createNewStageHistory(
@@ -31,35 +34,40 @@ export class ShooterHistoryService {
 			charlie,
 			delta,
 			plate,
-			miss,
+			paperMiss,
+			plateMiss,
 			noShoot,
 			procedureError,
 			time,
 			disqualified,
+			dnf,
+			stageID,
 		} = createNewStageHistoryParameters;
 		const score =
 			alpha * 5 +
 			charlie * 3 +
 			delta +
 			plate * 5 -
-			miss * 10 -
+			(paperMiss + plateMiss) * 10 -
 			noShoot * 10 -
 			procedureError * 10;
 		const hitFactor = score / time;
-
 		const newHistory = this.historyRepo.create({
 			shooter: shooter,
 			alphaCount: alpha,
 			charlieCount: charlie,
 			deltaCount: delta,
+			paperMissCount: paperMiss,
 			plateCount: plate,
-			missCount: miss,
+			plateMissCount: plateMiss,
 			noShootCount: noShoot,
 			procedureErrorCount: procedureError,
 			scoreCount: score,
 			timeCount: time,
 			hitFactor: hitFactor,
 			disqualified: disqualified,
+			didNotFinished: dnf,
+			stage: (await this.stageRepo.findBy({ id: stageID }))[0],
 		});
 		const savedHistory = await this.historyRepo.save(newHistory);
 		return savedHistory;
