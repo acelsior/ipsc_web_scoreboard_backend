@@ -68,7 +68,7 @@ export class ShooterHistoryService {
 			disqualified: disqualified,
 			didNotFinished: dnf,
 			stage: (await this.stageRepo.findBy({ id: stageID }))[0],
-			createAt: Date.now(),
+			createAt: new Date(),
 		});
 		const savedHistory = await this.historyRepo.save(newHistory);
 		return savedHistory;
