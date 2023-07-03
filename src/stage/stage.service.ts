@@ -21,12 +21,6 @@ export class StageService {
 	}
 
 	async getStageScoreByID(id: number) {
-		console.log(
-			id,
-			await this.stageRepo.findOneBy({
-				id: id,
-			})
-		);
 		return await this.stageHistRepo.find({
 			where: [
 				{

@@ -24,9 +24,7 @@ export class StageController {
 
 	@Get(":id/score")
 	async getStageScoreByID(@Param("id", ParseIntPipe) id: number) {
-		const resualt = await this.stageService.getStageScoreByID(id);
-		console.log(resualt);
-		return resualt
+		return (await this.stageService.getStageScoreByID(id));
 	}
 	@Get("score/:id")
 	async getStageScoreByHistoryID(@Param("id", ParseIntPipe) id: number) {
