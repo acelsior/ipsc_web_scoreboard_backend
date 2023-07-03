@@ -5,7 +5,7 @@ import { CreateStageDTO } from "src/dtos/stage.dto";
 import { ShooterStageHistory } from "src/entities/shooter/ShooterStageHistory";
 import { Stage } from "src/entities/stage/Stage";
 import { ImageUploadService } from "src/image-upload/image-upload.service";
-import { Repository } from "typeorm";
+import { FindOptionsWhere, Repository } from "typeorm";
 
 @Injectable()
 export class StageService {
@@ -21,15 +21,23 @@ export class StageService {
 	}
 
 	async getStageScoreByID(id: number) {
+		console.log(
+			id,
+			await this.stageRepo.findOneBy({
+				id: id,
+			})
+		);
 		return await this.stageHistRepo.find({
-			where: {
-				stage: await this.stageRepo.find({
-					where: {
+			where: [
+				{
+					stage: await this.stageRepo.findOneBy({
 						id: id,
-					},
-				})[0],
+					}),
+				},
+			] as FindOptionsWhere<Stage>,
+			relations: {
+				shooter: true,
 			},
-			relations: ["shooter"],
 		});
 	}
 	async deleteStageScoreByHistoryID(id: number) {
