@@ -7,9 +7,11 @@ import {
 	Param,
 	ParseIntPipe,
 	Post,
+	Put,
 } from "@nestjs/common";
 import { CreateStageDTO } from "src/dtos/stage.dto";
 import { StageService } from "./stage.service";
+import { CreateNewStageHistoryDTO } from "src/dtos/shooterStageHistory.dto";
 
 @Controller("stage")
 export class StageController {
@@ -22,7 +24,25 @@ export class StageController {
 
 	@Get(":id/score")
 	async getStageScoreByID(@Param("id", ParseIntPipe) id: number) {
-		return (await this.stageService.getStageScoreByID(id));
+		return await this.stageService.getStageScoreByID(id);
+	}
+	@Get("score/:id")
+	async getStageScoreByHistoryID(@Param("id", ParseIntPipe) id: number) {
+		return (await this.stageService.getStageScoreByHistoryID(id))[0];
+	}
+	@Delete(":id/score")
+	async deleteStageScoreByHistoryID(@Param("id", ParseIntPipe) id: number) {
+		return await this.stageService.deleteStageScoreByHistoryID(id);
+	}
+	@Put(":id/score")
+	async renewStageScoreByHistoryID(
+		@Param("id", ParseIntPipe) id: number,
+		@Body() createNewStageHistoryDTO: CreateNewStageHistoryDTO
+	) {
+		return await this.stageService.renewStageScoreByHistoryID(
+			id,
+			createNewStageHistoryDTO
+		);
 	}
 
 	@Get(":id")

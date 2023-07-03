@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { CreateNewStageHistoryDTO } from "src/dtos/shooterStageHistory.dto";
 import { CreateStageDTO } from "src/dtos/stage.dto";
 import { ShooterStageHistory } from "src/entities/shooter/ShooterStageHistory";
 import { Stage } from "src/entities/stage/Stage";
@@ -26,8 +27,76 @@ export class StageService {
 					where: {
 						id: id,
 					},
-				}),
+				})[0],
 			},
+			relations: ["shooter"],
+		});
+	}
+	async deleteStageScoreByHistoryID(id: number) {
+		return await this.stageHistRepo.delete({ id: id });
+	}
+
+	async renewStageScoreByHistoryID(
+		id: number,
+		createNewStageHistoryParameters: CreateNewStageHistoryDTO
+	) {
+		const {
+			alpha,
+			charlie,
+			delta,
+			plate,
+			paperMiss,
+			plateMiss,
+			noShoot,
+			procedureError,
+			time,
+			disqualified,
+			dnf,
+			stageID,
+			attempted,
+			proError,
+		} = createNewStageHistoryParameters;
+		let score: number, hitFactor: number;
+		if (dnf || disqualified) {
+			score = 0;
+			hitFactor = 0;
+		} else {
+			score =
+				alpha * 5 +
+				charlie * 3 +
+				delta +
+				plate * 5 -
+				(paperMiss + plateMiss) * 10 -
+				noShoot * 10 -
+				procedureError * 10;
+			hitFactor = score / time;
+		}
+		return await this.stageHistRepo.update(
+			{ id: id },
+			{
+				alphaCount: alpha,
+				charlieCount: charlie,
+				deltaCount: delta,
+				paperMissCount: paperMiss,
+				plateCount: plate,
+				plateMissCount: plateMiss,
+				noShootCount: noShoot,
+				procedureErrorCount: procedureError,
+				scoreCount: score,
+				timeCount: time,
+				hitFactor: hitFactor,
+				disqualified: disqualified,
+				didNotFinished: dnf,
+				stage: (await this.stageRepo.findBy({ id: stageID }))[0],
+				createAt: new Date(),
+				attempted: attempted,
+				proErrors: proError,
+			}
+		);
+	}
+	async getStageScoreByHistoryID(id: number) {
+		return await this.stageHistRepo.find({
+			where: { id: id },
 			relations: ["shooter"],
 		});
 	}

@@ -42,16 +42,24 @@ export class ShooterHistoryService {
 			disqualified,
 			dnf,
 			stageID,
+			attempted,
+			proError,
 		} = createNewStageHistoryParameters;
-		const score =
-			alpha * 5 +
-			charlie * 3 +
-			delta +
-			plate * 5 -
-			(paperMiss + plateMiss) * 10 -
-			noShoot * 10 -
-			procedureError * 10;
-		const hitFactor = score / time;
+		let score: number, hitFactor: number;
+		if (dnf || disqualified) {
+			score = 0
+			hitFactor = 0
+		} else {
+			score =
+				alpha * 5 +
+				charlie * 3 +
+				delta +
+				plate * 5 -
+				(paperMiss + plateMiss) * 10 -
+				noShoot * 10 -
+				procedureError * 10;
+			hitFactor = score / time;
+		}
 		const newHistory = this.historyRepo.create({
 			shooter: shooter,
 			alphaCount: alpha,
@@ -69,6 +77,8 @@ export class ShooterHistoryService {
 			didNotFinished: dnf,
 			stage: (await this.stageRepo.findBy({ id: stageID }))[0],
 			createAt: new Date(),
+			attempted: attempted,
+			proErrors: proError,
 		});
 		const savedHistory = await this.historyRepo.save(newHistory);
 		return savedHistory;

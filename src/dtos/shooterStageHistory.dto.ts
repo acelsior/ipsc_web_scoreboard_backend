@@ -1,3 +1,5 @@
+import { ProceduralError, ProceduralErrorTypes } from "src/types";
+
 export class CreateNewStageHistoryDTO {
 	alpha: number;
 	charlie: number;
@@ -11,6 +13,8 @@ export class CreateNewStageHistoryDTO {
 	disqualified: boolean;
 	dnf: boolean;
 	stageID: number;
+	attempted: boolean;
+	proError: ProceduralErrorTypes[];
 }
 
 export interface CreateNewStageHistoryParameters {
@@ -26,4 +30,6 @@ export interface CreateNewStageHistoryParameters {
 	disqualified: boolean;
 	dnf: boolean;
 	stageID: number;
+	attempted: boolean;
+	proError: ProceduralErrorTypes[];
 }

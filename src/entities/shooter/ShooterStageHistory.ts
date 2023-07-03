@@ -1,6 +1,15 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+	AfterLoad,
+	BeforeInsert,
+	BeforeUpdate,
+	Column,
+	Entity,
+	ManyToOne,
+	PrimaryGeneratedColumn,
+} from "typeorm";
 import { Shooter } from "./Shooter";
 import { Stage } from "../stage/Stage";
+import { ProceduralErrorTypes } from "src/types";
 
 @Entity({ name: "shooter_stage_history" })
 export class ShooterStageHistory {
@@ -8,11 +17,11 @@ export class ShooterStageHistory {
 		id: number;
 
 	@ManyToOne(() => Shooter, (shooter) => shooter.history, {
-		onDelete: "CASCADE"
+		onDelete: "CASCADE",
 	})
 		shooter: Shooter;
 	@ManyToOne(() => Stage, (stage) => stage.history, {
-		onDelete: "CASCADE"
+		onDelete: "CASCADE",
 	})
 		stage: Stage;
 
@@ -34,9 +43,9 @@ export class ShooterStageHistory {
 		procedureErrorCount: number;
 	@Column()
 		scoreCount: number;
-	@Column({ type: "float"})
+	@Column({ type: "float" })
 		timeCount: number;
-	@Column({ type: "float"})
+	@Column({ type: "float" })
 		hitFactor: number;
 	@Column()
 		disqualified: boolean;
@@ -44,4 +53,9 @@ export class ShooterStageHistory {
 		didNotFinished: boolean;
 	@Column({ nullable: false })
 		createAt: Date;
+	@Column()
+		attempted: boolean;
+
+	@Column("simple-array", { nullable: true })
+		proErrors: ProceduralErrorTypes[];
 }
